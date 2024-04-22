@@ -1,5 +1,5 @@
 # OBI
-Questao1
+QuestaoA - SEMANA1
 #include <stdio.h>
  
 int main() {
