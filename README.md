@@ -1,5 +1,7 @@
 # OBI
 QuestaoA - SEMANA1
+
+
 #include <stdio.h>
  
 int main() {
