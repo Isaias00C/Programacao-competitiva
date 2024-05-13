@@ -7,8 +7,9 @@ int main(void) {
 
   for(int i = 0; i < N; i++){
     scanf("%d", &num_acessos);
-    acessos_totais += num_acessos;
-    if(acessos_totais <= 1000000){
+    
+    if(acessos_totais < 1000000){
+      acessos_totais += num_acessos;
       num_dias += 1;
     }
   }
