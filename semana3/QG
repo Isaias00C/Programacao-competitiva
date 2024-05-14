@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  int N, fita[20000];
+
+  scanf("%d", &N);
+
+  for (int i = 0; i < N; i++) {
+    scanf("%d", &fita[i]);
+  }
+
+  for (int i = 0; i < N; i++) {
+    if (fita[i] == -1) {
+      for (int j = i, k = i;; j++, k--) {
+        if(j >= N){
+          j--;
+        }
+        if(k < 0){
+          k++;
+        }
+        if(fita[j] == 0){
+          fita[i] = abs(i-j);
+          break;
+        }
+        if(fita[k] == 0){
+          fita[i] = abs(k-i);
+          break;
+        }
+      }
+    }
+    
+  }
+
+  for(int i = 0; i < N -1; i++){
+    printf("%d ", fita[i]);
+  }
+  printf("%d\n", fita[N-1]);
+  return 0;
+}
