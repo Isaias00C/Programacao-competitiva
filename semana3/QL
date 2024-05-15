@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main(void) {
+  int N;
+  scanf("%d", &N);
+  long int matriz[100000][2];
+  char letras[100000];
+
+  for (int i = 0; i < N; i++) {
+    scanf("%ld %c %ld", &matriz[i][0], &letras[i], &matriz[i][1]);
+  }
+
+  int inicio = 0, indice;
+
+  for (int i = 0; i < N; i++) {
+    // procurar o indice em que matriz[][0] onde o valor inicio ta
+    for (indice = 0; indice < N; indice++) {
+      if (matriz[indice][0] == inicio) {
+        break;
+      }
+    }
+    printf("%c", letras[indice]);
+    inicio = matriz[indice][1];
+  }
+
+  return 0;
+}
