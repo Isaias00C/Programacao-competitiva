@@ -1,0 +1,40 @@
+#include <bits/stdc++.h> 
+using namespace std;
+
+int main(){
+  int num_cidades, verificador = 0;
+  cin >> num_cidades;
+  map<int,int> cidades;
+
+  for(int i = 0; i < num_cidades; i++){
+    int cidade1, cidade2;
+    cin >> cidade1 >> cidade2;
+  //verificar se a chave cidade1 ja existe no map
+    if(cidades.find(cidade1) != cidades.end()){
+      verificador = 1;
+    }
+    cidades[cidade1] = cidade2;
+  }
+
+  if(verificador){
+    cout << "N";
+    return 0;
+  }
+  
+//comecando na cidade 1
+  int cidade_partida = 1, cidade_chegada, cont = 0;
+  set<int> cidades_visitadas;
+  for(int i = 1; i <= num_cidades; i++){
+    cidades_visitadas.insert(cidade_partida);
+    cidade_chegada = cidades[cidade_partida];
+    cont += 1;
+    if(cidades_visitadas.find(cidade_chegada) != cidades_visitadas.end()){
+      if(cont != num_cidades){
+        cout << "N";
+        return 0;
+      }
+    }
+    cidade_partida = cidade_chegada;    
+  }
+  cout << "S";
+}
