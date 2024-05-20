@@ -20,21 +20,24 @@ int main(){
     cout << "N";
     return 0;
   }
-  
+
 //comecando na cidade 1
-  int cidade_partida = 1, cidade_chegada, cont = 0;
+  int cidade_partida = 1;
   set<int> cidades_visitadas;
   for(int i = 1; i <= num_cidades; i++){
-    cidades_visitadas.insert(cidade_partida);
-    cidade_chegada = cidades[cidade_partida];
-    cont += 1;
-    if(cidades_visitadas.find(cidade_chegada) != cidades_visitadas.end()){
-      if(cont != num_cidades){
+    if(cidades_visitadas.find(cidade_partida) == cidades_visitadas.end()){
+      cidades_visitadas.insert(cidade_partida);
+      cidade_partida = cidades[cidade_partida];
+    }else{
+      if(cidades_visitadas.size() != num_cidades){
         cout << "N";
         return 0;
       }
     }
-    cidade_partida = cidade_chegada;    
   }
-  cout << "S";
+  if(cidades_visitadas.find(cidade_partida) == cidades_visitadas.begin()){
+    cout << "S";
+  }else{
+    cout << "N";
+  }
 }
