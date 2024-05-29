@@ -33,7 +33,7 @@ int main(){
             m[linha_i][coluna_i] = 0;
             coluna_i--;
             num_salas++;
-        }else if(m[linha_i][coluna_i] == 3){
+        }else if(m[linha_i + 1][coluna_i] == 3 || m[linha_i - 1][coluna_i] == 3 || m[linha_i][coluna_i + 1] == 3 || m[linha_i][coluna_i - 1] == 3){
             num_salas++;
             break;
         }else {
@@ -42,7 +42,5 @@ int main(){
             num_salas = 1;
         }
     }
-
     cout << num_salas;
-
 }

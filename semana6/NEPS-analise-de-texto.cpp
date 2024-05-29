@@ -2,12 +2,21 @@
 using namespace std;
 
 int main(){
-    vector<string> frases;
-
-    while(1){
-        string palavra;
-        cin >> palavra;
-        frases.push_back(palavra);
+    vector<string> frase;
+    string palavras;
+    
+    while(getline(cin, palavras, ' ')){
+        frase.push_back(palavras);
     }
-    string teste = frases[frases.max_size() - 1];
+    string controle;
+    cin >> controle;
+    int contador_de_palavras;
+    for(int i = 0; i < frase.max_size(); i++){
+        string palavra = frase[i];
+        int j = 0;
+        if(frase[i].find(palavra[j]) != frase[i].end()){
+            contador_de_palavras++;
+        }
+    }
+    cout << contador_de_palavras;
 }
