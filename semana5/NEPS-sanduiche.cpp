@@ -11,6 +11,7 @@ int main(){
     cin >> x; 
     sanduiche.push_back(x);
   }
+
   for(int i = 0; i < N; i++){
     sanduiche.push_back(sanduiche[i]);
   }
@@ -18,7 +19,7 @@ int main(){
   int soma = sanduiche[0], cont = 0;
   int i = 0, j = 0;
 
-  while(j < 2*N || i < N){
+  while(j < 2*N && i < N){
     if(soma == D){
       cont++;
       j++;
