@@ -2,8 +2,8 @@
 using namespace std;
 
 int main(){
-    int numChilds;
-    cin >> numChilds;
+    int numChilds, milk;
+    cin >> numChilds >> milk;
     vector<int> otmism;
     for(int i = 0; i < numChilds; i++){
         int value;
@@ -11,11 +11,13 @@ int main(){
         otmism.push_back(value);
     }
     sort(otmism.begin(),otmism.end());
-    int sum = otmism[0];
-    int i = 1;
-    while(sum <= 100){
+    int sum = 0;
+    int i;
+    for(i = 0; i < numChilds; i++){
+        if(sum > milk){
+            break;
+        }
         sum += otmism[i];
-        i++;
     }
-    cout << i+1;
+    cout << i << "\n";
 }
