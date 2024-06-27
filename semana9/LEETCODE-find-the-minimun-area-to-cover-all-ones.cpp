@@ -33,6 +33,6 @@ public:
             }
             if(find[2] && find[3]) break;
         }
-        return (find[1] - find[0] + 1)*(find[3] - find[2] + 1);
+        return (area[1] - area[0] + 1)*(area[3] - area[2] + 1);
     }
 };

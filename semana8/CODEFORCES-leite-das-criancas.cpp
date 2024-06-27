@@ -14,10 +14,12 @@ int main(){
     int sum = 0;
     int i;
     for(i = 0; i < numChilds; i++){
+        sum += otmism[i];
         if(sum > milk){
+            i--;
             break;
         }
-        sum += otmism[i];
+        if(i == numChilds - 1) break;
     }
-    cout << i << "\n";
+    cout << i + 1 << "\n";
 }
