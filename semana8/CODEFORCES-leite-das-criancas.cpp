@@ -23,3 +23,8 @@ int main(){
     }
     cout << i + 1 << "\n";
 }
+
+//problema no caso
+//1 99
+//0
+//se tem uma criança e ela se satisfaça com 0, entao eu satisfaço uma criança, mas o output esperado é 0 crianças satisfeitas
