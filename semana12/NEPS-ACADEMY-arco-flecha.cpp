@@ -5,6 +5,9 @@ using namespace std;
 
 int a[MAXN], t[4 * MAXN];
 
+//t: segment tree em vetor
+//a: matriz dos valores
+
 void build(int v, int tl, int tr){
     if(tr == tl) {
         t[v] = a[tr];
