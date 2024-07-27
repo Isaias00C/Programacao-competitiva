@@ -2,11 +2,11 @@
 #define int long long
 using namespace std;
 
-int aux = 0, infos[10009];
+int isPossible = 0, infos[10009];
 
 void query(int i, int M){
     if(i==0){
-        aux = 1;
+        isPossible = 1;
         return;
     }
 
@@ -29,17 +29,20 @@ signed main(){
     infos[N-1] = M - infos[N-1];
     query(N-1, M);
 
-    //inicia a soma das distancias
+    //ajeitando o vetor para ser crescente
     infos[0] = min(infos[0], M - infos[0]);
+
+    //iniciando a soma
     int ans = infos[0];
 
-    if(aux){
+    if(isPossible){
         for(int i = 1; i < N; i++){
+            //soma minima
             if(min(infos[i],M - infos[i]) >= infos[i-1]){
-                infos[i] = min(infos[i],M - infos[i]);
+                infos[i] = min(infos[i], M - infos[i]); //ajeitando o vetor
                 ans += infos[i];
             }else {
-                infos[i] = max(infos[i], M - infos[i]);
+                infos[i] = max(infos[i], M - infos[i]); //ajeitando o vetor
                 ans += infos[i];
             }
         }
