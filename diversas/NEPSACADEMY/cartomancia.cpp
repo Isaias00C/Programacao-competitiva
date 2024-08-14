@@ -33,12 +33,15 @@ void f(){
     cout << "Acertos do Lobo: " << acertos_lobo << "\n";
     cout << "Margem de Erro: " << margem_de_erro << "\n";
 
+    if(acertos_enzo == acertos_lobo && margem_de_erro == 0){
+        cout << "Empate";
+        return ;
+    }
+
     if(max(acertos_enzo, acertos_lobo) - min(acertos_enzo, acertos_lobo) > margem_de_erro){
         if(acertos_enzo > acertos_lobo) cout << "Enzo";
         else cout << "Lobo";
     }else {
-        
         cout << "Indefinido";
     }
 }
-
