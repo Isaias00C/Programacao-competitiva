@@ -18,22 +18,15 @@ int lengthOfLIS(vector<int>& nums) {
     vector<int> dp (nums.size(),1);
     
     //esse for cria a dp
-    for(int l = 0; l < nums.size(); l++){
-        set<int> LIS;
-        
+    for(int l = 0; l < nums.size(); l++){    
         //esse for vasculha o nums procurando possibilidades
         for(int index = 0; index < l; index++){
             //criando um array com os possiveis casos 
             if(nums[l] > nums[index]) {
-                LIS.insert(dp[index]);
+                dp[l] = max(dp[l], dp[index] + 1);
             }
-        }
-        //atualizando o dp     
-        if(!LIS.empty()){ 
-            auto aux = *LIS.rbegin();
-            dp[l] = aux + 1;
         }
     }
 
-    return dp[nums.size()-1];
+    return *max_element(dp.begin(), dp.end());
 }
