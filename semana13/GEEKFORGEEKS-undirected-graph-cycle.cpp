@@ -2,7 +2,6 @@
 using namespace std;
 
 bool isCycle(int V, vector<int> adj[]) {
-        vector<int> cycle;
         queue<int> queue;
         
         for(int startNode = 0; startNode < adj->size(); startNode++){
@@ -12,10 +11,9 @@ bool isCycle(int V, vector<int> adj[]) {
             while(!queue.empty()){
                 int currNode = queue.front();
                 queue.pop();
-                cycle.push_back(currNode);
                 
                 if(!vis[currNode]){
-                    for(auto i : adj[currNode]){
+                    for(int i = 0; i < adj[startNode].size(); i++){
                         queue.push(adj[startNode][i]);
                     }
                 }
