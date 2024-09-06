@@ -9,29 +9,49 @@ int main(){
     cin >> N;
 
     vector<int> nums (N);
-    int auxMax = 0;
     for(int i = 0; i < N; i++){
         cin >> nums[i];
-        if(auxMax < nums[i]) auxMax = nums[i];
     }
 
-    //max pow(2, ?)
-    int x = 0;
-    while(auxMax){
-        ++x;
-        auxMax = auxMax >> 1;
-    }
+    //nenhum dos numeros passam de 32 bits
+    vector<vector<int>> matriz (32, vector<int> (N, 0));
 
-    vector<vector<int>> matriz (x, vector<int> (N, 0));
-    
-    //build matriz
-
-    for(int i = 0; i < N; i++){
-        for(int j = 0; j < x; j--){
-            nums[i] = nums[i] >> 1;
-            int b = nums[i] << 1;
-            matriz[j][i] = nums[i] - b;
+    //criando a matriz
+    for(int row = 0; row < 32; row++){
+        for(int col = 0; col < N; col--){
+            nums[col] = nums[col] >> 1;
+            int b = nums[col] << 1;
+            matriz[row][col] = nums[col] - b;
         }
+    }
+
+    for(int col = 0; col < N; col++){
+        //contar a qtd de bits 1
+        int n = 0;
+        for(int row = 0; row < 32; row++){
+            if(matriz[row][col] == 1){ 
+                n++;
+                matriz[row][col] = 0;
+            }
+        }
+        
+        
+        //setando os primeiros bist como 1
+        for(int row = 0; row < n; row++){
+            matriz[row][col] = 1;
+        }
+    }
+
+    //imprimindo os numeros
+    for(int col = 0; col < N; col++){
+        int num = 0;
+        for(int row = 0; row < 32; row++){
+            if(matriz[row][col] == 1){
+                num = num << 1;
+                num++;
+            }   
+        }
+        cout << num << " ";
     }
 
     return 0;
