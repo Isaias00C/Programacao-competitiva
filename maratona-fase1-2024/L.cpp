@@ -1,6 +1,5 @@
-//noa vale a pena essa soluçao
-
 //https://codeforces.com/gym/105327/problem/L
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -18,17 +17,16 @@ int main(){
 
     //criando a matriz
     for(int row = 0; row < 32; row++){
-        for(int col = 0; col < N; col--){
+        for(int col = 0; col < N; col++){
+            if(nums[col] & 1 == 1) matriz[row][col] = 1;
             nums[col] = nums[col] >> 1;
-            int b = nums[col] << 1;
-            matriz[row][col] = nums[col] - b;
         }
     }
 
-    for(int col = 0; col < N; col++){
+    for(int row = 0; row < 32; row++){
         //contar a qtd de bits 1
         int n = 0;
-        for(int row = 0; row < 32; row++){
+        for(int col = 0; col < N; col++){
             if(matriz[row][col] == 1){ 
                 n++;
                 matriz[row][col] = 0;
@@ -37,7 +35,7 @@ int main(){
         
         
         //setando os primeiros bist como 1
-        for(int row = 0; row < n; row++){
+        for(int col = 0; col < n; col++){
             matriz[row][col] = 1;
         }
     }
@@ -45,11 +43,11 @@ int main(){
     //imprimindo os numeros
     for(int col = 0; col < N; col++){
         int num = 0;
-        for(int row = 0; row < 32; row++){
+        for(int row = 31; row >= 0; row--){
+            num = num<<1;
             if(matriz[row][col] == 1){
-                num = num << 1;
                 num++;
-            }   
+            }
         }
         cout << num << " ";
     }

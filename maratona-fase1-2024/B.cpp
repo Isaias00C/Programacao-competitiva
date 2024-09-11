@@ -6,22 +6,21 @@ void print(vector<pair<int,int>> v){
     cout << v[v.size()-1].first << "\n";
 }
 
-void dfs(vector<vector<pair<int,int>>> graph, int start, int target, vector<pair<int,int>> way, vector<pair<int,int>> vis){
-    
-    
-    if(graph[start][target].first == 1){
+void dfs( int start, int target, int movie, vector<vector<vector<int>>> graph, vector<pair<int,int>> way, vector<pair<int,int>> vis){
+    if(graph[start][target][movie] == 1){
         print(way);
+        return;
     }else {
         for(int i = 0; i < graph[start].size(); i++){
-            if(graph[start][i].first == 1){
-                way.push_back(graph[start][i]);
-                dfs(graph, i, target, way, vis);
-            }
+                
+                if(graph[start][i].first == 1){
+                    way.push_back(graph[start][i]);
+                    dfs(graph, i, target, way, vis);
+                    way.pop_back();
+                }
+            
         }
     }
-
-    way.pop_back();
-
 }
 
 int main(){
@@ -29,7 +28,7 @@ int main(){
 
     cin >> movies >> actors;
     
-    vector<vector<pair<int,int>>> adj (actors);
+    vector<vector<vector<int>>> adj (actors, vector<vector<int>> (actors, vector<int> (movies, 0)));
 
     for(int movie = 0; movie < movies; movie++){
         int numActors;
@@ -43,19 +42,13 @@ int main(){
             persons.push_back(actor);
         }
 
-        //criar as adjacencias
-        int l = persons.size();
-
-        for(int i = 0, j = 0; i < l ; j++){
-            if(i != j) {
-                adj[persons[i]][persons[j]].first = 1;
-                adj[persons[j]][persons[i]].first = 1;
-                adj[persons[i]][persons[j]].second = movie;
-                adj[persons[j]][persons[i]].second = movie;
-            }
-            if(j == l-1) {
-                l = 0;
+        //criar a lista de adjacencias
+        for(int i = 0, j = i+1; i < persons.size(); j++){
+            adj[i][j][movie] = 1;
+            adj[j][i][movie] = 1;
+            if(j+1 == persons.size()) {
                 i++;
+                j = i+1;
             }
         }
     }
@@ -68,7 +61,9 @@ int main(){
         cin >> p1 >> p2;
         vector<pair<int,int>> v;
         vector<pair<int,int>> vis;
-        dfs(adj, p1, p2, v, vis);
+        for(){
+            dfs(p1, p2, adj, v, vis);
+        }
     }
 
     return 0;
