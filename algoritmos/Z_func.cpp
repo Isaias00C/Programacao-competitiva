@@ -8,15 +8,17 @@ int main() {
 
     cin >> text >> pattern;
 
-    Z(text, pattern);
-
+    vector<int> arr = Z(text, pattern);
     
+    for(int i : arr) {
+        cout << i;
+    }
 
 }
 
 vector<int> Z(string text, string pattern) {
     string z = text + "$" + pattern;
-    vector<int> z_arr (z.size(), -1);
+    vector<int> z_arr (z.size());
 
     int left, right;
     left = right = 0;
@@ -30,7 +32,7 @@ vector<int> Z(string text, string pattern) {
             }
             
             right--;
-            z[right - left + 1];
+            z[i] = right - left + 1;
         }else {
             int aux = i - left;
             
