@@ -6,19 +6,34 @@ class Node {
         int val;
         Node *rightNode;
         Node *leftNode;
+
+        Node(int x) : val(x) {
+            Node.rightNode = nullptr;
+            Node.leftNode = nullptr;
+        }
 }
 
 class SegTree {
     public:
-        SegTree() {
-            
-        }
-
         void build (Node *t, int tl, int tr){
             if (tl == tr) {
                 t->val = a[tr];
-                
+                return;
             }
+
+            t->rightNode = new Node;
+            t->leftNode = new Node;
+
+            int tm = (tl+tr) / 2;
+            
+            build(t->leftNode, tl, tm);
+            build(t->rightNode, tm+1, tr);
+
+            t->val =  t->leftNode->val + t->rightNode->val;
+        }
+
+        void update (Node *t, ) {
+            
         }
 }
 
