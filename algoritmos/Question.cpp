@@ -1,6 +1,7 @@
 //https://atcoder.jp/contests/abc389/tasks/abc389_e
 
 #include <bits/stdc++.h>
+#define int long long
 using namespace std;
 
 int verificar(vector<int>& precos, int qtd_de_itens, int maximo_valor_gasto, vector<int>& _k, int X){
@@ -19,7 +20,8 @@ int verificar(vector<int>& precos, int qtd_de_itens, int maximo_valor_gasto, vec
     return valor_restante;
 }
 
-int main(){
+signed main(){
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
     int qtd_de_itens, maximo_valor_gasto;
     cin >> qtd_de_itens >> maximo_valor_gasto;
 
@@ -64,7 +66,7 @@ int main(){
 
     for (int i = 0; i < qtd_de_itens; ++i){
         ans += k[i];
-        int proxima_compra = (2*k[i] - 1)*precos[i];
+        int proxima_compra = (2*(k[i]+1) - 1)*precos[i];
         if (proxima_compra <= final_valor_gasto + 1 && final_valor_restante - proxima_compra >= 0){
             final_valor_restante -= proxima_compra;
             ans++;
