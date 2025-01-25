@@ -9,7 +9,7 @@ int verificar(vector<int>& precos, int qtd_de_itens, int maximo_valor_gasto, vec
 
     for (int i = 0; i < qtd_de_itens; ++i){
         int j = (X + precos[i])/(2*precos[i]); //numemo maximo de unidades possivel de compra
-        int valor_gasto = j*j*precos[i]; //preço total gasto pra conseguir comprar todas a unidades ate j
+        __int128_t valor_gasto = __int128_t(j)*j*precos[i]; //preço total gasto pra conseguir comprar todas a unidades ate j
 
         if(valor_gasto > valor_restante) return -1;
 
