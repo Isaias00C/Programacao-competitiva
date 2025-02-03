@@ -27,12 +27,10 @@ signed main(){
 
         aux += saldo[i];
 
-        if (aux > resp) resp = aux;
+        resp = max(resp, aux);
     }
     
-    resp = resp > 0 ? resp : 0;
-
-    cout << resp;
+    cout << max(resp, 0LL);
 
     return 0;
 }
