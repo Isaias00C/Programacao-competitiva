@@ -1,3 +1,5 @@
+//solution after the end
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -5,37 +7,44 @@ void solve(){
     int N, M;
     cin >> N >> M;
 
-    vector<vector<int>> foodsInDishes(M+1), dishesWithFood (N+1);
+    vector<vector<int>> dishes(M+1);
 
-    for(int i = 1; i <= M; i++){
+    for(int i = 1; i <= M; ++i){
         int K;
         cin >> K;
-        for(int j = 1; j <= K; j++){
+
+        for(int j = 0; j < K; j++){
             int food;
             cin >> food;
-
-            foodsInDishes[i].push_back(food);
-            dishesWithFood[food].push_back(K);
+            dishes[i].push_back(food);
         }
     }
 
-    int count = 0;
-    for(int i = 1; i <= N; i++) {
-        int B;
-        cin >> B;
+    vector<int> v(N+1);
+    for(int i = 1; i <= N; ++i){
+        int _f;
+        cin >> _f;
 
-        for(int i = 0; i < dishesWithFood[B].size(); i++){
-            vector<int> dishes;
-            copy(dishesWithFood[i+1].begin(), dishesWithFood[i+1].end(), back_inserter(dishes));
-            auto it = find(dishes.begin(), dishes.end(), B);
-            dishes.erase(it);
-            if(dishes.size() == 0) count++;
+        v[_f] = i;
+    }
 
-            cout << count << "\n";
+    vector<int> days (N+1, 0);
+    
+    for(int i = 1; i <= M; i++){
+        int lastDay = 0;
+        for (int food : dishes[i]){
+            lastDay = max(lastDay, v[food]);
         }
 
-        cout << count << "\n";
+        days[lastDay]++;
     }
+
+    for(int i = 1; i < N; ++i){
+        cout << days[i] << "\n";
+        days[i+1] += days[i];
+    }
+    
+    cout << days[N] << "\n";
 
 }
 
