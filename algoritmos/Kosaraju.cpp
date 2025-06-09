@@ -8,7 +8,7 @@ vector<vector<int>> GReverse(vector<vector<int>>& G){
     for(int i = 0; i < G.size(); ++i){
 
         // para cada vertice destino setaremos no grafo _G no vertice G[i][j] como sendo destino do vertice i
-        for(int j = 0; j < G[0].size(); ++j){
+        for(int j = 0; j < G[i].size(); ++j){
             _G[G[i][j]].push_back(i);
         }
     }
@@ -18,32 +18,39 @@ vector<vector<int>> GReverse(vector<vector<int>>& G){
 
 vector<int> DFS(vector<vector<int>>& _G){
     stack<int> s;
-    set<int> vis;
+    set<int> vis, inStack;
     vector<int> order;
 
-    s.push(0);
+    for(int i = 0; i < _G.size(); ++i){
+        if(vis.find(i) == vis.end()){
+            s.push(i);
+            
+            while(!s.empty()){
+                int currVertice = s.top();
+                s.pop();
+                
+                vis.insert(currVertice);
+                int hasChild = 0;
+                for(int v : _G[currVertice]){
+                    if(inStack.find(v) == inStack.end() && vis.find(v) == vis.end()){    
+                        s.push(v);
+                        hasChild++;
+                    }
+                }
 
-    while(!s.empty()){
-        int currVertice = s.top();
-        s.pop();
-
-        vis.insert(currVertice);
-        order.push_back(currVertice);
-
-        for(int v : _G[currVertice]){
-            s.push(v);
+                if(!hasChild) order.push_back(currVertice);
+            }
         }
     }
-
     return order;
 }
 
-int Counter(vector<vector<int>> G, vector<int> order){
+int Counter(vector<vector<int>>& G, vector<int>& order){
     set<int> vis;
     int count = 0;
 
     for(int v : order){
-        if(vis.find(v) != vis.end()) {
+        if(vis.find(v) == vis.end()) {
             stack<int> s;
             s.push(v);
             vis.insert(v);
@@ -66,5 +73,23 @@ int Counter(vector<vector<int>> G, vector<int> order){
 }
 
 int main(){
-    
+    int V, E;
+    cin >> V >> E;
+
+    vector<vector<int>> G (V);
+
+    for(int i = 0; i < E; ++i){
+        int a, b;
+        cin >> a >> b;
+
+        G[a].push_back(b);
+    }
+
+    vector<vector<int>> _G = GReverse(G);
+
+    vector<int> order = DFS(_G);
+
+    cout << Counter(G, order) << "\n";    
+
+    return 0;
 }
